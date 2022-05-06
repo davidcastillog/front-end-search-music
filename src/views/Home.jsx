@@ -24,21 +24,21 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    getUserLocation();
+    // getUserLocation();
   }, []);
 
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="lg" fixed>
-        <SearchBar setAlbums={setAlbums} userLocation={userLocation} />
-        <Grid container justifyContent="center" paddingTop={2}>
-          <Typography variant="body2" gutterBottom>
-            Albums found: {albums.length}
-          </Typography>
-        </Grid>
+      <SearchBar setAlbums={setAlbums} userLocation={userLocation} />
+      <Container maxWidth="lg" sx={{ mb: 3, mt: 8 }}>
         {albums.length > 0 && (
           <>
+            <Grid container justifyContent="center" paddingTop={2}>
+              <Typography variant="body2" gutterBottom>
+                Albums found: {albums.length}
+              </Typography>
+            </Grid>
             <Grid container justifyContent="center" paddingTop={2}>
               <AlbumCard albums={currentAlbums} />
             </Grid>
