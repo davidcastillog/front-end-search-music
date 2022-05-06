@@ -6,10 +6,11 @@ import { apiServer } from "./api";
  returns The response from the API call.
 */
 
-export const getAlbums = async (searchTerm) => {
+export const getAlbums = async (searchTerm, country) => {
   try {
+    if (!country) country = "ES";
     const res = await apiServer.get(
-      `search?term=${searchTerm}&entity=album&limit=200`
+      `search?term=${searchTerm}&entity=album&limit=200&country=${country}`
     );
     return res;
   } catch (error) {

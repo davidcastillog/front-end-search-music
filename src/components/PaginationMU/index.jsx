@@ -26,6 +26,11 @@ const PaginationMU = ({ albums, setCurrentAlbums }) => {
     setCurrentPage(value);
   };
 
+  // If a new search is made, the currentPage is set to 1
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [albums]);
+
   return (
     <>
       <Pagination onChange={handleChange} count={totalPages} color="primary" />
