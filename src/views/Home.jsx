@@ -1,7 +1,19 @@
-function Home() {
-  return (
-    <div>Home</div>
-  )
-}
+import { useState } from "react";
+import { PaginationMU, AlbumCard, SearchBar } from "../components";
 
-export default Home;
+export const Home = () => {
+  const [albums, setAlbums] = useState([]);
+  const [currentAlbums, setCurrentAlbums] = useState([]);
+
+  return (
+    <>
+      <SearchBar setAlbums={setAlbums} />
+      {albums.length > 0 && (
+        <>
+          <PaginationMU albums={albums} setCurrentAlbums={setCurrentAlbums} />
+          <AlbumCard albums={currentAlbums} />
+        </>
+      )}
+    </>
+  );
+};
