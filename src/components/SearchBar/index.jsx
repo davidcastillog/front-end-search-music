@@ -4,10 +4,15 @@ import { getAlbums } from "../../services/musicWS";
 const SearchBar = ({ setAlbums }) => {
   const [searchTerms, setSearchTerms] = useState("");
 
+  // When the user types sets the searchTerms to the value of the input
   const handleChange = (e) => {
     setSearchTerms(e.target.value);
   };
 
+  /*
+  When the user clicks on the search button, make a call to the API
+  to get the albums that match the search terms.
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
     getAlbums(searchTerms)
