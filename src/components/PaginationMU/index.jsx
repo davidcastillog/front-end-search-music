@@ -21,7 +21,7 @@ const PaginationMU = ({ albums, setCurrentAlbums }) => {
     setTotalPages(Math.ceil(albums.length / albumsPerPage));
   }, [albums.length, albumsPerPage]);
 
-// When the user clicks on a page number. It sets the currentPage to the page number that was clicked
+  // When the user clicks on a page number. It sets the currentPage to the page number that was clicked
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };

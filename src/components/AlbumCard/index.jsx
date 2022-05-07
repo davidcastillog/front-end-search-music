@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-const AlbumCard = ({ albums }) => {
+const AlbumCard = ({ currentAlbums }) => {
   // If the Album name is longer than 50 characters, truncate it
   const shortCollectionName = (collectionName) => {
     return collectionName.length > 50
@@ -13,7 +13,7 @@ const AlbumCard = ({ albums }) => {
 
   return (
     <>
-      {albums.map((album, i) => (
+      {currentAlbums.map((album, i) => (
         <Card
           sx={{ width: 225, height: 210, mt: 2, ml: 1, mr: 1, p: 2 }}
           key={i}

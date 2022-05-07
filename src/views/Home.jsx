@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { PaginationMU, AlbumCard, SearchBar } from "../components";
+import {
+  PaginationMU,
+  AlbumCard,
+  SearchBar,
+  List,
+  ToggleButtons,
+} from "../components";
 import { geoLocation } from "../services/GeoLocation";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
@@ -10,8 +16,9 @@ export const Home = () => {
   const [albums, setAlbums] = useState([]);
   const [currentAlbums, setCurrentAlbums] = useState([]);
   const [userLocation, setUserLocation] = useState("ES");
+  const [view, setView] = useState("grid");
 
-  // It gets the user's actual country to get correct data to display
+  // It gets the user's location to show the correct data (albums available in the country)
   const getUserLocation = async () => {
     geoLocation()
       .then((res) => {
@@ -24,23 +31,38 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    // getUserLocation();
+    getUserLocation();
   }, []);
 
   return (
     <>
       <CssBaseline />
       <SearchBar setAlbums={setAlbums} userLocation={userLocation} />
-      <Container maxWidth="lg" sx={{ mb: 3, mt: 8 }}>
+      <Container maxWidth="lg" sx={{ mb: 3, mt: 10 }}>
         {albums.length > 0 && (
           <>
+            <Grid
+              container
+              className="toggle-buttons"
+              direction="column"
+              justifyContent="center"
+              alignItems="flex-end"
+            >
+              <ToggleButtons view={view} setView={setView} />
+            </Grid>
             <Grid container justifyContent="center" paddingTop={2}>
-              <Typography variant="body2" gutterBottom>
+              <Typography variant="button" gutterBottom>
                 Albums found: {albums.length}
               </Typography>
             </Grid>
             <Grid container justifyContent="center" paddingTop={2}>
-              <AlbumCard albums={currentAlbums} />
+              {/* Checking if the view is grid or list. If it is grid, it will render the
+               AlbumCard component, if it is list, it will render the TableList component. */}
+              {view === "grid" ? (
+                <AlbumCard currentAlbums={currentAlbums} />
+              ) : (
+                <List currentAlbums={currentAlbums} />
+              )}
             </Grid>
             <Grid container justifyContent="center" paddingTop={2}>
               <PaginationMU
