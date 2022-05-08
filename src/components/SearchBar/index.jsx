@@ -44,7 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "20ch",
       "&:focus": {
         width: "20ch",
       },
@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({ setAlbums, userLocation }) => {
+const SearchBar = ({ setAlbums, userLocation, setResults }) => {
   const [searchTerms, setSearchTerms] = useState("");
 
   // When the user types sets the searchTerms to the value of the input
@@ -68,7 +68,12 @@ const SearchBar = ({ setAlbums, userLocation }) => {
     e.preventDefault();
     getAlbums(searchTerms, userLocation)
       .then((res) => {
-        setAlbums(res.data.results);
+        if (res.data.results.length > 0) {
+          setAlbums(res.data.results);
+          setResults(true);
+        } else {
+          setResults(false);
+        }
       })
       .catch((err) => {
         return err;
@@ -112,10 +117,10 @@ const SearchBar = ({ setAlbums, userLocation }) => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search for an album…"
               onChange={handleChange}
               value={searchTerms}
-              sx={{ width: "250px" }}
+              sx={{ width: "350px" }}
               inputProps={{ "aria-label": "search" }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
