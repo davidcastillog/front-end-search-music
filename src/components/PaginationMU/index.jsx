@@ -1,10 +1,15 @@
-import Pagination from "@mui/material/Pagination";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import Pagination from "@mui/material/Pagination";
 
-const PaginationMU = ({ albums, setCurrentAlbums }) => {
+
+const PaginationMU = ({ setCurrentAlbums }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [albumsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
+
+  // Allows to dispatch actions to the redux store
+  const albums = useSelector((state) => state.songs);
 
   // Slice the albums array to show only the albums for the current page
   useEffect(() => {

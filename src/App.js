@@ -6,8 +6,6 @@ import RootNavigation from "./RootNavigation";
 
 function App() {
   const [userLocation, setUserLocation] = useState("ES");
-  const [albums, setAlbums] = useState([]);
-  const [results, setResults] = useState(null);
 
   // It gets the user's location to show the correct data (albums available in the country)
   const getUserLocation = async () => {
@@ -22,13 +20,13 @@ function App() {
   };
 
   useEffect(() => {
-    getUserLocation();
+    // getUserLocation();
   }, []);
 
   return (
     <div className="App">
-      <SearchBar setAlbums={setAlbums} userLocation={userLocation} setResults={setResults} />
-      <RootNavigation {...{ albums, results }} />
+      <SearchBar userLocation={userLocation} />
+      <RootNavigation />
     </div>
   );
 }

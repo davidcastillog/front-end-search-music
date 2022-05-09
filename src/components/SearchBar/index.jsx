@@ -2,6 +2,8 @@ import { useState } from "react";
 import { getAlbums } from "../../services/MusicWS";
 import { styled, alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useDispatch, connect } from "react-redux";
+import { setSongs, clearSongs, setResults } from "../../redux/reducers";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -52,8 +54,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({ setAlbums, userLocation, setResults }) => {
+const mapStatetoProps = (state) => ({
+  results: state.results,
+});
+const mapDispatchToProps = (dispatch) => ({
+  setResults: (results) => dispatch(setResults(results)),
+});
+
+const SearchBar = ({ userLocation }) => {
   const [searchTerms, setSearchTerms] = useState("");
+
+  // Allows to dispatch actions to the redux store
+  const dispatch = useDispatch();
 
   // When the user types sets the searchTerms to the value of the input
   const handleChange = (e) => {
@@ -69,10 +81,12 @@ const SearchBar = ({ setAlbums, userLocation, setResults }) => {
     getAlbums(searchTerms, userLocation)
       .then((res) => {
         if (res.data.results.length > 0) {
-          setAlbums(res.data.results);
-          setResults(true);
+          dispatch(clearSongs());
+          // Dispatch the results to the redux store
+          dispatch(setSongs(res.data.results));
+          dispatch(setResults(true));
         } else {
-          setResults(false);
+          dispatch(setResults(false));
         }
       })
       .catch((err) => {
@@ -135,4 +149,4 @@ const SearchBar = ({ setAlbums, userLocation, setResults }) => {
   );
 };
 
-export default SearchBar;
+export default connect(mapStatetoProps, mapDispatchToProps)(SearchBar);
