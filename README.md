@@ -16,6 +16,8 @@ The project is built using the following technologies:
    * [React Router 6.3.0](https://reactrouter.com/docs/en/v6/getting-started/overview)
    * [Axios 0.27.2](https://github.com/axios/axios)
    * [Material-UI 5.6.4](https://mui.com/)
+   * [React Redux 8.0.1](https://react-redux.js.org/)
+   * [Redux Toolkit 1.8.1](https://redux-toolkit.js.org/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -48,8 +50,19 @@ _Follow this simple steps:_
    ```sh
    npm install
    ```
+2. Enter your API key in .env file
+   ```sh
+   REACT_APP_GEO_API=<your_api_key>
+   ```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+<p align="right"><a href="#top">back to top ^</a></p>
+
+<!-- API LIST -->
+## API
+Get your API key from:
+* [ipbase](https://ipbase.com//)
 
 <p align="right"><a href="#top">back to top ^</a></p>
 

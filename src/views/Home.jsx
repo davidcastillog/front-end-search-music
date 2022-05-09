@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { PaginationMU, AlbumCard, List, ToggleButtons } from "../components";
+import { useSelector } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-export const Home = ({ albums, results }) => {
+export const Home = () => {
   const [currentAlbums, setCurrentAlbums] = useState([]);
   const [view, setView] = useState("grid");
+
+  const albums = useSelector((state) => state.songs);
+  const results = useSelector((state) => state.results);
 
   return (
     <>
