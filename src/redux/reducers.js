@@ -16,7 +16,7 @@ const songsSlice = createSlice({
   },
 });
 
-// Results reducer. Initial State = null. Boolean to indicate if results are available.
+// Boolean reducer to indicate if results are available.
 const resultsSlice = createSlice({
   name: "results",
   initialState: null,
