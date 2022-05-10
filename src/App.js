@@ -20,7 +20,7 @@ function App() {
   };
 
   useEffect(() => {
-    // getUserLocation();
+    getUserLocation();
   }, []);
 
   return (
